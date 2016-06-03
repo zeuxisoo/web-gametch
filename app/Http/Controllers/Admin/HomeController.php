@@ -1,6 +1,8 @@
 <?php
 namespace App\Http\Controllers\Admin;
 
+use Auth;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class HomeController extends Controller {
@@ -9,8 +11,23 @@ class HomeController extends Controller {
         return view('admin.home.index');
     }
 
-    public function signin() {
-        // TODO: sign in
+    public function signin(Request $request) {
+        $input = $request->only('username', 'password');
+        $remember = $request->only('remember');
+
+        if (Auth::attempt($input, $remember) == true) {
+            return redirect(route('web.admin.dashboard.index'));
+        }else{
+            return redirect()->back()->withInput()->withErrors([
+                'email' => 'These credentials do not match our records.',
+            ]);
+        }
+    }
+
+    public function signout() {
+        Auth::logout();
+
+        return redirect(route('web.admin.home.index'));
     }
 
 }

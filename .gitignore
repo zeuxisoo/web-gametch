@@ -7,3 +7,5 @@ Homestead.json
 
 /node_modules
 /public/vendor
+/storage/database.sqlite
+composer.phar

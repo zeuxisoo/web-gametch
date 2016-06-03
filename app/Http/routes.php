@@ -20,7 +20,14 @@ Route::group(['as' => 'web.'], function() {
 
     // Backend
     Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
-        Route::get('/',        ['as' => 'home.index', 'uses' => 'HomeController@index']);
-        Route::post('/signin', ['as' => 'home.signin', 'uses' => 'HomeController@signin']);
+        Route::get('/',        ['as' => 'home.index',   'uses' => 'HomeController@index']);
+        Route::post('/signin', ['as' => 'home.signin',  'uses' => 'HomeController@signin']);
+        Route::get('/signout', ['as' => 'home.signout', 'uses' => 'HomeController@signout']);
+
+        Route::group(['middleware' => 'role.admin'], function() {
+            Route::group(['prefix' => 'dashboard'], function() {
+                Route::get('/', ['as' => 'dashboard.index', 'uses' => 'DashboardController@index']);
+            });
+        });
     });
 });
