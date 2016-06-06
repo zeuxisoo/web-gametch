@@ -28,6 +28,10 @@ Route::group(['as' => 'web.'], function() {
             Route::group(['prefix' => 'dashboard'], function() {
                 Route::get('/', ['as' => 'dashboard.index', 'uses' => 'DashboardController@index']);
             });
+
+            Route::group(['prefix' => 'game-category'], function() {
+                Route::get('/create', ['as' => 'game_category.create', 'uses' => 'GameCategoryController@create']);
+            });
         });
     });
 });

@@ -48,7 +48,7 @@
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Game Category<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="">Add Game Category</a>
+                                    <a href="{{ route('web.admin.game_category.create') }}">Add Game Category</a>
                                 </li>
                                 <li>
                                     <a href="">Edit Game Category</a>
