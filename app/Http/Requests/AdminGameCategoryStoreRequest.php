@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
 
-class AdminCategoryCategoryStoreRequest extends Request {
+class AdminGameCategoryStoreRequest extends Request {
 
     public function authorize() {
         return true;

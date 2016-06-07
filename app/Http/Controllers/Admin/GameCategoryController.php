@@ -4,7 +4,8 @@ namespace App\Http\Controllers\Admin;
 use Image;
 use Storage;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\AdminCategoryCategoryStoreRequest;
+use App\Http\Requests\AdminGameCategoryStoreRequest;
+use App\Http\Requests\AdminGameCategoryUpdateRequest;
 use App\Repositories\GameCategoryRepository;
 
 class GameCategoryController extends Controller {
@@ -19,7 +20,7 @@ class GameCategoryController extends Controller {
         return view('admin.game_category.create');
     }
 
-    public function store(AdminCategoryCategoryStoreRequest $request) {
+    public function store(AdminGameCategoryStoreRequest $request) {
         $input = $request->only('chinese_name', 'english_name', 'cover_photo');
 
         $input = array_merge($input, [
@@ -35,6 +36,34 @@ class GameCategoryController extends Controller {
         $gameCategories = $this->gameCategoryRepository->findAllWithPaginate(10);
 
         return view('admin.game_category.manage', compact('gameCategories'));
+    }
+
+    public function edit($id) {
+        $gameCategory = $this->gameCategoryRepository->findById($id);
+
+        return view('admin.game_category.edit', compact('gameCategory'));
+    }
+
+    public function update(AdminGameCategoryUpdateRequest $request) {
+        $id    = $request->input('id');
+        $input = $request->only('chinese_name', 'english_name', 'cover_photo');
+
+        $gameCategory = $this->gameCategoryRepository->findById($id);
+
+        // Upload new cover when cover is entered
+        if ($input['cover_photo'] !== null) {
+            $input['cover_photo'] = $this->uploadCoverPhoto($input['cover_photo']);
+
+            // Delete oldest cover
+            Storage::disk('game-category')->delete($gameCategory->cover_photo);
+        }else{
+            $input['cover_photo'] = $gameCategory->cover_photo;
+        }
+
+        // Update database records
+        $this->gameCategoryRepository->updateById($id, $input);
+
+        return Redirect()->back()->withNotice('Game category updated');
     }
 
     private function uploadCoverPhoto($file) {
