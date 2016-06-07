@@ -31,6 +31,12 @@ class GameCategoryController extends Controller {
         return Redirect()->back()->withNotice("Game category created");
     }
 
+    public function manage() {
+        $gameCategories = $this->gameCategoryRepository->findAllWithPaginate(10);
+
+        return view('admin.game_category.manage', compact('gameCategories'));
+    }
+
     private function uploadCoverPhoto($file) {
         $name = date("YmdHis").'_'.str_random(10);
         $ext  = $file->getClientOriginalExtension();

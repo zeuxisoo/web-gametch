@@ -16,4 +16,8 @@ class GameCategoryRepository extends AppRepository {
         return (new GameCategory)->create($input);
     }
 
+    public function findAllWithPaginate($perPage = 10) {
+        return $this->gameCategory->orderBy('created_at', 'desc')->paginate($perPage);
+    }
+
 }

@@ -51,7 +51,7 @@
                                     <a href="{{ route('web.admin.game_category.create') }}">Add Game Category</a>
                                 </li>
                                 <li>
-                                    <a href="">Edit Game Category</a>
+                                    <a href="{{ route('web.admin.game_category.manage') }}">Edit Game Category</a>
                                 </li>
                             </ul>
                         </li>
