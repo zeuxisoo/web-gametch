@@ -7,5 +7,6 @@ Homestead.json
 
 /node_modules
 /public/vendor
+/public/upload/game-category
 /storage/database.sqlite
 composer.phar

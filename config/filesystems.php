@@ -62,6 +62,12 @@ return [
             'bucket' => 'your-bucket',
         ],
 
+        'game-category' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/game-category'),
+            'visibility' => 'public',
+        ],
+
     ],
 
 ];
