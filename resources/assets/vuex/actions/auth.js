@@ -35,4 +35,33 @@ export default class AuthAction {
         )
     }
 
+    signin({ dispatch, router }, account, password) {
+        api.auth.signin({
+            account : account,
+            password: password
+        }).then(
+            response => {
+                let body  = response.data
+                let user  = body.user
+                let token = body.token
+
+                dispatch(types.AUTH_SIGNIN_SUCCESS, user, token)
+
+                router.go({
+                    name: 'home'
+                })
+            },
+            response => {
+                let reason = response.data
+                let errors = reason.errors
+
+                if (errors) {
+                    MessageHelper.errors(errors)
+                }else{
+                    MessageHelper.error(reason.message)
+                }
+            }
+        )
+    }
+
 }
