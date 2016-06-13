@@ -16,4 +16,8 @@ export default class Auth extends Base {
         return this.vue.http.post(this.apiUrl('/auth/signin'), data)
     }
 
+    signout() {
+        return this.vue.http.post(this.apiUrl('/auth/signout'))
+    }
+
 }

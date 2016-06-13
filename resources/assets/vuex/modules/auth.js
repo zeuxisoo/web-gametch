@@ -1,4 +1,4 @@
-import { AUTH_SIGNUP_SUCCESS, AUTH_SIGNIN_SUCCESS } from '../mutation-types'
+import { AUTH_SIGNUP_SUCCESS, AUTH_SIGNIN_SUCCESS, AUTH_SIGNOUT_SUCCESS } from '../mutation-types'
 
 const state = {
     user         : null,
@@ -15,6 +15,12 @@ const mutations = {
         state.user          = user
         state.token         = token
         state.authenticated = true
+    },
+
+    [AUTH_SIGNOUT_SUCCESS] (state) {
+        state.user          = null
+        state.token         = ""
+        state.authenticated = false
     }
 }
 

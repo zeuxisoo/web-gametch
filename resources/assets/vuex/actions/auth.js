@@ -64,4 +64,29 @@ export default class AuthAction {
         )
     }
 
+    signout({ dispatch, router }) {
+        api.auth.signout().then(
+            response => {
+                let body  = response.data
+                let state = body.state
+
+                dispatch(types.AUTH_SIGNOUT_SUCCESS)
+
+                router.go({
+                    name: 'home'
+                })
+            },
+            response => {
+                let reason = response.data
+                let errors = reason.errors
+
+                if (errors) {
+                    MessageHelper.errors(errors)
+                }else{
+                    MessageHelper.error(reason.message)
+                }
+            }
+        )
+    }
+
 }

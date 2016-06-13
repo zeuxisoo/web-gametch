@@ -20,14 +20,15 @@
                         </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
-                        <li v-if="authenticated">
-                            <a class="nav-link">Sign out</a>
-                        </li>
                         <li v-if="!authenticated" v-link="{ name: 'signin' }">
                             <a class="nav-link">Sign in</a>
                         </li>
                         <li v-if="!authenticated" v-link="{ name: 'signup' }">
                             <a class="nav-link">Sign up</a>
+                        </li>
+
+                        <li v-if="authenticated" v-on:click="doSignout">
+                            <a class="nav-link">Sign out</a>
                         </li>
                     </ul>
                 </div>
@@ -53,6 +54,7 @@ import 'toastr/build/toastr.min.css'
 import '../css/app.css'
 import store from '../vuex/store'
 import { authGetter } from '../vuex/getters'
+import { authAction } from '../vuex/actions'
 
 export default {
 
@@ -61,11 +63,16 @@ export default {
     vuex:{
         getters:{
             authenticated: authGetter.isAuthenticated
+        },
+        actions: {
+            signout: authAction.signout
         }
     },
 
-    ready() {
-
+    methods: {
+        doSignout() {
+            this.signout()
+        }
     }
 
 }
