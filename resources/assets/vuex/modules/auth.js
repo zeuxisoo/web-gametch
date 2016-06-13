@@ -1,8 +1,9 @@
 import { AUTH_SIGNUP_SUCCESS, AUTH_SIGNIN_SUCCESS } from '../mutation-types'
 
 const state = {
-    user : null,
-    token: "",
+    user         : null,
+    token        : "",
+    authenticated: false,
 }
 
 const mutations = {
@@ -11,8 +12,9 @@ const mutations = {
     },
 
     [AUTH_SIGNIN_SUCCESS] (state, user, token) {
-        state.user  = user
-        state.token = token
+        state.user          = user
+        state.token         = token
+        state.authenticated = true
     }
 }
 

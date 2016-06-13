@@ -52,14 +52,15 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'toastr/build/toastr.min.css'
 import '../css/app.css'
 import store from '../vuex/store'
+import { authGetter } from '../vuex/getters'
 
 export default {
 
     store: store,
 
-    data() {
-        return {
-            authenticated: false
+    vuex:{
+        getters:{
+            authenticated: authGetter.isAuthenticated
         }
     },
 
