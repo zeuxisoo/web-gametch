@@ -51,7 +51,8 @@ $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function($api) {
     $api->group(['namespace' => 'App\Api\Version1\Controllers', 'prefix' => 'auth'], function($api) {
-        $api->post('/signup', ['as' => 'api.auth.signup', 'uses' => 'AuthController@signup']);
-        $api->post('/signin', ['as' => 'api.auth.signin', 'uses' => 'AuthController@signin']);
+        $api->post('/signup',  ['as' => 'api.auth.signup',  'uses' => 'AuthController@signup']);
+        $api->post('/signin',  ['as' => 'api.auth.signin',  'uses' => 'AuthController@signin']);
+        $api->post('/signout', ['as' => 'api.auth.signout', 'uses' => 'AuthController@signout']);
     });
 });

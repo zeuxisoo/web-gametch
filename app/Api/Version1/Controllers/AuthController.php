@@ -62,4 +62,12 @@ class AuthController extends ApiController {
         ]);
     }
 
+    public function signout() {
+        Auth::logout();
+
+        return $this->response->array([
+            'state' => 'OK'
+        ]);
+    }
+
 }
