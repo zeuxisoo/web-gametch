@@ -1,5 +1,5 @@
 import api from '../../api'
-import MessageHelper from '../../helpers/message'
+import ResponseHelper from '../../helpers/response'
 import * as types from '../mutation-types'
 
 export default class AuthAction {
@@ -22,16 +22,7 @@ export default class AuthAction {
                     name: 'signin'
                 })
             },
-            response => {
-                let reason = response.data
-                let errors = reason.errors
-
-                if (errors) {
-                    MessageHelper.errors(errors)
-                }else{
-                    MessageHelper.error(reason.message)
-                }
-            }
+            response => ResponseHelper.error(response)
         )
     }
 
@@ -51,16 +42,7 @@ export default class AuthAction {
                     name: 'home'
                 })
             },
-            response => {
-                let reason = response.data
-                let errors = reason.errors
-
-                if (errors) {
-                    MessageHelper.errors(errors)
-                }else{
-                    MessageHelper.error(reason.message)
-                }
-            }
+            response => ResponseHelper.error(response)
         )
     }
 
@@ -76,16 +58,7 @@ export default class AuthAction {
                     name: 'home'
                 })
             },
-            response => {
-                let reason = response.data
-                let errors = reason.errors
-
-                if (errors) {
-                    MessageHelper.errors(errors)
-                }else{
-                    MessageHelper.error(reason.message)
-                }
-            }
+            response => ResponseHelper.error(response)
         )
     }
 
