@@ -2,7 +2,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryCategoriesTable extends Migration {
+class CreateGameCategoriesTable extends Migration {
 
     public function up() {
         Schema::create('game_categories', function(Blueprint $table) {
