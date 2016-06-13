@@ -20,4 +20,12 @@ class GameRepository extends AppRepository {
         return $this->game->orderBy('created_at', 'desc')->paginate($perPage);
     }
 
+    public function findById($id) {
+        return $this->game->find($id);
+    }
+
+    public function updateById($id, $input) {
+        return $this->game->whereId($id)->update($input);
+    }
+
 }

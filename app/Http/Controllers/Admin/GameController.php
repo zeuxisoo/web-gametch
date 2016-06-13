@@ -44,11 +44,32 @@ class GameController extends Controller {
     }
 
     public function edit($id) {
+        $gameCategories = $this->gameCategoryRepository->findAll();
+        $game           = $this->gameRepository->findById($id);
 
+        return view('admin.game.edit', compact('gameCategories', 'game'));
     }
 
     public function update(AdminGameUpdateRequest $request) {
+        $id    = $request->input('id');
+        $input = $request->only('game_category_id', 'chinese_name', 'english_name', 'cover_photo');
 
+        $game = $this->gameRepository->findById($id);
+
+        // Upload new cover when cover is entered
+        if ($input['cover_photo'] !== null) {
+            $input['cover_photo'] = $this->uploadCoverPhoto($input['cover_photo']);
+
+            // Delete oldest cover
+            Storage::disk('game')->delete($game->cover_photo);
+        }else{
+            $input['cover_photo'] = $game->cover_photo;
+        }
+
+        // Update database records
+        $this->gameRepository->updateById($id, $input);
+
+        return Redirect()->back()->withNotice('Game updated');
     }
 
     private function uploadCoverPhoto($file) {
