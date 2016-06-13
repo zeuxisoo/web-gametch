@@ -25,12 +25,6 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="cover-photo" class="col-sm-2 control-label">Cover Photo</label>
-                        <div class="col-sm-10">
-                            <input type="file" class="form-control" id="cover-photo" name="cover_photo">
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
                             <button type="submit" class="btn btn-default">Save</button>
                         </div>

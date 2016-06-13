@@ -13,7 +13,6 @@ class AdminGameCategoryStoreRequest extends Request {
         return [
             'chinese_name' => 'required',
             'english_name' => 'required',
-            'cover_photo'  => 'required|image|mimes:jpg,jpeg,png,gif'
         ];
     }
 }

@@ -9,7 +9,6 @@ class CreateGameCategoriesTable extends Migration {
             $table->increments('id');
             $table->string('chinese_name');
             $table->string('english_name');
-            $table->string('cover_photo');
             $table->timestamps();
         });
     }

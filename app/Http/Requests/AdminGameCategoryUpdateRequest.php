@@ -14,7 +14,6 @@ class AdminGameCategoryUpdateRequest extends Request {
             'id'           => 'required|exists:game_categories,id',
             'chinese_name' => 'required',
             'english_name' => 'required',
-            'cover_photo'  => 'image|mimes:jpg,jpeg,png,gif'
         ];
     }
 }
