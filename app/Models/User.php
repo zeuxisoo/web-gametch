@@ -9,7 +9,7 @@ class User extends Authenticatable {
     use EntrustUserTrait;
 
     protected $fillable = [
-        'name', 'email', 'password',
+        'username', 'email', 'password',
     ];
 
     protected $hidden = [

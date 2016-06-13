@@ -45,3 +45,12 @@ Route::group(['as' => 'web.'], function() {
         });
     });
 });
+
+//
+$api = app('Dingo\Api\Routing\Router');
+
+$api->version('v1', function($api) {
+    $api->group(['namespace' => 'App\Api\Version1\Controllers', 'prefix' => 'auth'], function($api) {
+        $api->post('/signup', ['as' => 'api.auth.signup', 'uses' => 'AuthController@signup']);
+    });
+});
