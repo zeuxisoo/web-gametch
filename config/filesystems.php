@@ -68,6 +68,12 @@ return [
             'visibility' => 'public',
         ],
 
+        'game' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/upload/game'),
+            'visibility' => 'public',
+        ],
+
     ],
 
 ];

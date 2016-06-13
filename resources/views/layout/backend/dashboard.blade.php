@@ -59,10 +59,10 @@
                             <a href="#"><i class="fa fa-tasks fa-fw"></i> Game<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="">Add Game</a>
+                                    <a href="{{ route('web.admin.game.create') }}">Add Game</a>
                                 </li>
                                 <li>
-                                    <a href="">Edit Game</a>
+                                    <a href="{{ route('web.admin.game.manage') }}">Edit Game</a>
                                 </li>
                             </ul>
                         </li>

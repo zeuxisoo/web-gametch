@@ -24,8 +24,8 @@
             <div class="row">
                 <div class="col-md-3">Game</div>
                 <div class="col-md-9">
-                    <a href="" class="btn btn-xs btn-default">Add Game</a>
-                    <a href="" class="btn btn-xs btn-default">Edit Game</a>
+                    <a href="{{ route('web.admin.game.create') }}" class="btn btn-xs btn-default">Add Game</a>
+                    <a href="{{ route('web.admin.game.manage') }}" class="btn btn-xs btn-default">Edit Game</a>
                 </div>
             </div>
             <hr>

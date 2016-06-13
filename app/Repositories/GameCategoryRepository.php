@@ -24,6 +24,10 @@ class GameCategoryRepository extends AppRepository {
         return $this->gameCategory->find($id);
     }
 
+    public function findAll() {
+        return $this->gameCategory->orderBy('created_at', 'desc')->get();
+    }
+
     public function updateById($id, $input) {
         return $this->gameCategory->whereId($id)->update($input);
     }

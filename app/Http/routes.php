@@ -36,6 +36,14 @@ Route::group(['as' => 'web.'], function() {
                 Route::get('/edit/{id}', ['as' => 'game_category.edit',   'uses' => 'GameCategoryController@edit']);
                 Route::post('/update',   ['as' => 'game_category.update', 'uses' => 'GameCategoryController@update']);
             });
+
+            Route::group(['prefix' => 'game'], function() {
+                Route::get('/create',    ['as' => 'game.create', 'uses' => 'GameController@create']);
+                Route::post('/store',    ['as' => 'game.store',  'uses' => 'GameController@store']);
+                Route::get('/manage',    ['as' => 'game.manage', 'uses' => 'GameController@manage']);
+                Route::get('/edit/{id}', ['as' => 'game.edit',   'uses' => 'GameController@edit']);
+                Route::post('/update',   ['as' => 'game.update', 'uses' => 'GameController@update']);
+            });
         });
     });
 });
