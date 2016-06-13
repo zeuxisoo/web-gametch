@@ -49,9 +49,13 @@ body {
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.min'
 import 'font-awesome/css/font-awesome.min.css'
+import 'toastr/build/toastr.min.css'
 import '../css/app.css'
+import store from '../vuex/store'
 
 export default {
+
+    store: store,
 
     data() {
         return {

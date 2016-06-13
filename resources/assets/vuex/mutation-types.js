@@ -1,0 +1,2 @@
+export const AUTH_SIGNUP_SUCCESS = 'AUTH_SIGNUP_SUCCESS'
+

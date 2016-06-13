@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import { sync } from 'vuex-router-sync'
 import store from './vuex/store'
+import Api from './api'
 
-Vue.use(VueRouter);
+Vue.use(VueRouter)
 
 var Router = new VueRouter({
     hashbang: false,
     history: true,
     saveScrollPosition: true
-});
+})
 
 Router.map({
     '/': {
@@ -25,6 +27,8 @@ Router.map({
         name     : 'signin',
         component: require('./views/signin.vue')
     },
-});
+})
 
-Router.start(Vue.extend(require('./views/app.vue')), '#app');
+sync(store, Router)
+
+Router.start(Vue.extend(require('./views/app.vue')), '#app')

@@ -1,19 +1,18 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import middlewares from './middlewares'
+import auth from './modules/auth'
+
+const debug = process.env.NODE_ENV !== 'production'
 
 Vue.use(Vuex)
-
-const state = {
-
-}
-
-const mutations = {
-
-}
+Vue.config.debug = debug
+Vue.config.warnExpressionErrors = false
 
 export default new Vuex.Store({
-    state      : state,
-    mutations  : mutations,
+    modules    : {
+        auth: auth,
+    },
+    strict     : debug,
     middlewares: middlewares
 })
