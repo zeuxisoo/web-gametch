@@ -16,4 +16,8 @@ class GameRepository extends AppRepository {
         return (new Game)->create($input);
     }
 
+    public function findAllWithPaginate($perPage = 10) {
+        return $this->game->orderBy('created_at', 'desc')->paginate($perPage);
+    }
+
 }

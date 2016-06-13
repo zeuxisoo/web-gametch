@@ -38,7 +38,9 @@ class GameController extends Controller {
     }
 
     public function manage() {
+        $games = $this->gameRepository->findAllWithPaginate(10);
 
+        return view('admin.game.manage', compact('games'));
     }
 
     public function edit($id) {
