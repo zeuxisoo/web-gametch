@@ -14,9 +14,7 @@
 Route::group(['as' => 'web.'], function() {
 
     // Frontend
-    Route::get('/', function () {
-        return view('welcome');
-    });
+    Route::get('/', ['as' => 'home.index', 'uses' => 'HomeController@index']);
 
     // Backend
     Route::group(['as' => 'admin.', 'prefix' => 'admin', 'namespace' => 'Admin'], function() {
