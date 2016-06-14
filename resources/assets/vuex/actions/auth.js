@@ -1,5 +1,6 @@
 import api from '../../api'
 import ResponseHelper from '../../helpers/response'
+import MessageHelper from '../../helpers/message'
 import * as types from '../mutation-types'
 
 export default class AuthAction {
@@ -14,7 +15,7 @@ export default class AuthAction {
                 let body = response.data
                 let user = body.data
 
-                dispatch(types.AUTH_SIGNUP_SUCCESS, user)
+                dispatch(types.AUTH_USER_SUCCESS, user)
 
                 MessageHelper.success('Your account has been created successfully')
 
@@ -65,8 +66,18 @@ export default class AuthAction {
         )
     }
 
-    signinUserByToken({ dispatch, router }, user, token) {
-        dispatch(types.AUTH_SIGNIN_SUCCESS, user, token)
+    signinByToken({ dispatch, router }, token) {
+        api.headers.setAuthorizationToken(token)
+
+        api.user.me().then(
+            response => {
+                let body = response.data
+                let user = body.data
+
+                dispatch(types.AUTH_SIGNIN_SUCCESS, user, token)
+            },
+            response => ResponseHelper.error(response)
+        )
     }
 
 }
