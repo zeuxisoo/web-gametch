@@ -57,7 +57,7 @@ class AuthController extends ApiController {
         }
 
         return $this->response->array([
-            'user'  => Auth::user(),
+            'user'  => (new UserTransformer())->transform(Auth::user()),
             'token' => $token,
         ]);
     }
