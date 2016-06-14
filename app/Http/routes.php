@@ -50,9 +50,15 @@ Route::group(['as' => 'web.'], function() {
 $api = app('Dingo\Api\Routing\Router');
 
 $api->version('v1', function($api) {
-    $api->group(['namespace' => 'App\Api\Version1\Controllers', 'prefix' => 'auth'], function($api) {
-        $api->post('/signup',  ['as' => 'api.auth.signup',  'uses' => 'AuthController@signup']);
-        $api->post('/signin',  ['as' => 'api.auth.signin',  'uses' => 'AuthController@signin']);
-        $api->post('/signout', ['as' => 'api.auth.signout', 'uses' => 'AuthController@signout']);
+    $api->group(['namespace' => 'App\Api\Version1\Controllers'], function($api) {
+        $api->group(['prefix' => 'auth'], function($api) {
+            $api->post('/signup',  ['as' => 'api.auth.signup',  'uses' => 'AuthController@signup']);
+            $api->post('/signin',  ['as' => 'api.auth.signin',  'uses' => 'AuthController@signin']);
+            $api->post('/signout', ['as' => 'api.auth.signout', 'uses' => 'AuthController@signout']);
+        });
+
+        $api->group(['prefix' => 'user', 'middleware' => 'api.auth'], function($api) {
+            $api->get('me', ['as' => 'api.user.me', 'uses' => 'UserController@me']);
+        });
     });
 });
