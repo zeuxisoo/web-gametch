@@ -53,8 +53,11 @@ import 'font-awesome/css/font-awesome.min.css'
 import 'toastr/build/toastr.min.css'
 import '../css/app.css'
 import store from '../vuex/store'
+import StorageHelper from '../helpers/storage'
+import api from '../api'
 import { authGetter } from '../vuex/getters'
-import { authAction } from '../vuex/actions'
+import { authAction, userAction } from '../vuex/actions'
+import { TOKEN_NAME } from '../constraint'
 
 export default {
 
@@ -65,7 +68,22 @@ export default {
             authenticated: authGetter.isAuthenticated
         },
         actions: {
-            signout: authAction.signout
+            fetchMe          : userAction.fetchMe,
+            signout          : authAction.signout,
+            signinUserByToken: authAction.signinUserByToken,
+        }
+    },
+
+    created() {
+        let token = StorageHelper.get(TOKEN_NAME)
+
+        // If token exists, setup authorization header, fetch related user and init state by token
+        if (typeof token !== "undefined") {
+            api.headers.setAuthorizationToken(token)
+
+            this.fetchMe(user => {
+                this.signinUserByToken(user, token)
+            })
         }
     },
 

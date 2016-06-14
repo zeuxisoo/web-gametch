@@ -36,6 +36,9 @@ export default class AuthAction {
                 let user  = body.user
                 let token = body.token
 
+                // Setup authorization header
+                api.headers.setAuthorizationToken(token)
+
                 dispatch(types.AUTH_SIGNIN_SUCCESS, user, token)
 
                 router.go({
@@ -60,6 +63,10 @@ export default class AuthAction {
             },
             response => ResponseHelper.error(response)
         )
+    }
+
+    signinUserByToken({ dispatch, router }, user, token) {
+        dispatch(types.AUTH_SIGNIN_SUCCESS, user, token)
     }
 
 }
