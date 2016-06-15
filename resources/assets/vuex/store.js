@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import middlewares from './middlewares'
 import auth from './modules/auth'
+import game from './modules/game'
 
 const debug = process.env.NODE_ENV !== 'production'
 
@@ -12,6 +13,7 @@ Vue.config.warnExpressionErrors = false
 export default new Vuex.Store({
     modules    : {
         auth: auth,
+        game: game,
     },
     strict     : debug,
     middlewares: middlewares
