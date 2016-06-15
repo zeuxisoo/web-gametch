@@ -3,7 +3,9 @@
         <div class="row">
             <div class="col-md-3" v-for="game in games">
                 <div class="thumbnail">
-                    <img v-bind:src="game.cover_photo">
+                    <a v-link="{ name: 'game', params: { id: game.id } }">
+                        <img v-bind:src="game.cover_photo">
+                    </a>
                     <div class="caption">
                         <h5>{{ game.english_name }}</h5>
                         <span class="label label-primary">{{ game.category.data.english_name }}</span>

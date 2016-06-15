@@ -12,4 +12,8 @@ export default class Game extends Base {
         return this.vue.http.get(this.apiUrl('/game/all'), params)
     }
 
+    show(id) {
+        return this.vue.http.get(this.apiUrl('/game/show/' + id))
+    }
+
 }

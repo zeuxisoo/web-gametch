@@ -19,4 +19,16 @@ export default class GameAction {
         )
     }
 
+    fetchGame({ dispatch, router }, id) {
+        api.game.show(id).then(
+            response => {
+                let body = response.data
+                let game = body.data
+
+                dispatch(types.GAME_FETCH_GAME_SUCCESS, game)
+            },
+            response => ResponseHelper.error(response)
+        )
+    }
+
 }

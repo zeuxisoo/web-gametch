@@ -27,6 +27,16 @@ Router.map({
         name     : 'signin',
         component: require('./views/signin.vue')
     },
+
+    '/game/:id': {
+        name     : 'game',
+        component: require('./views/game/index.vue')
+    },
+
+    '/game/:id/create': {
+        name     : 'game-create',
+        component: require('./views/game/create.vue')
+    },
 })
 
 sync(store, Router)

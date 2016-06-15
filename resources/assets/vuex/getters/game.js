@@ -8,4 +8,8 @@ export default class GameGetter {
         return state.game.pagination
     }
 
+    game(state) {
+        return state.game.game
+    }
+
 }
