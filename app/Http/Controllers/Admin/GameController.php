@@ -77,8 +77,8 @@ class GameController extends Controller {
         $ext  = $file->getClientOriginalExtension();
 
         // Image object
-        $image = Image::canvas(300, 300, '#FFFFFF')->insert(
-            Image::make($file)->resize(300, null, function($constraint) {
+        $image = Image::canvas(350, 350, '#FFFFFF')->insert(
+            Image::make($file)->resize(350, 350, function($constraint) {
                 $constraint->aspectRatio();
                 $constraint->upsize();
             }),

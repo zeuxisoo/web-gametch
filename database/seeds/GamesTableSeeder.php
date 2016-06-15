@@ -10,13 +10,13 @@ class GamesTableSeeder extends Seeder {
                 'game_category_id' => 1,
                 'chinese_name'     => "被遺忘的國度：惡魔之石",
                 'english_name'     => "FORGOTTEN REALMS: DEMON STONE",
-                'cover_photo'      => "20160613023259_X9P12mWO2p.png",
+                'cover_photo'      => "20160615054232_ZizhvrGFwV.png",
             ],
             [
                 'game_category_id' => 1,
                 'chinese_name'     => "翡翠帝國",
                 'english_name'     => "JADE EMPIRE: SPECIAL EDITION",
-                'cover_photo'      => "20160613024649_IfGa4qXOKn.png",
+                'cover_photo'      => "20160615054240_SZRZx5DmKD.png",
             ],
         ];
 
