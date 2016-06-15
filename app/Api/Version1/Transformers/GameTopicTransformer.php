@@ -12,9 +12,10 @@ class GameTopicTransformer extends TransformerAbstract {
 
     public function transform(GameTopic $gameTopic) {
         return [
-            'id'      => $gameTopic->id,
-            'subject' => $gameTopic->subject,
-            'content' => $gameTopic->content,
+            'id'         => $gameTopic->id,
+            'subject'    => $gameTopic->subject,
+            'content'    => $gameTopic->content,
+            'created_at' => $gameTopic->created_at->diffForHumans(),
         ];
     }
 

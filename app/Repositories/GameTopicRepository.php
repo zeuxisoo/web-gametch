@@ -16,4 +16,8 @@ class GameTopicRepository extends AppRepository {
         return (new GameTopic)->create($input);
     }
 
+    public function findAllByGameIdWithPaginate($gameId, $perPage = 10) {
+        return $this->gameTopic->whereGameId($gameId)->orderBy('created_at', 'desc')->paginate($perPage);
+    }
+
 }

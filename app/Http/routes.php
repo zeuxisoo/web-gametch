@@ -66,8 +66,12 @@ $api->version('v1', function($api) {
             $api->get('/show/{id}', ['as' => 'api.game.show',  'uses' => 'GameController@show']);
         });
 
-        $api->group(['prefix' => 'game-topic', 'middleware' => 'api.auth'], function($api) {
-            $api->post('/store', ['as' => 'api.game.topic.store', 'uses' => 'GameTopicController@store']);
+        $api->group(['prefix' => 'game-topic'], function($api) {
+            $api->get('/all', ['as' => 'api.game.topic.all', 'uses' => 'GameTopicController@all']);
+
+            $api->group(['middleware' => 'api.auth'], function($api) {
+                $api->post('/store', ['as' => 'api.game.topic.store', 'uses' => 'GameTopicController@store']);
+            });
         });
     });
 });
