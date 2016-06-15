@@ -9,10 +9,11 @@ export default class GameAction {
             page: page || 1
         }).then(
             response => {
-                let body  = response.data
-                let games = body.data
+                let body       = response.data
+                let games      = body.data
+                let pagination = body.meta.pagination
 
-                dispatch(types.GAME_FETCH_GAMES_SUCCESS, games)
+                dispatch(types.GAME_FETCH_GAMES_SUCCESS, games, pagination)
             },
             response => ResponseHelper.error(response)
         )

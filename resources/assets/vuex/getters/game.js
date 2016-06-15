@@ -4,4 +4,8 @@ export default class GameGetter {
         return state.game.games
     }
 
+    pagination(state) {
+        return state.game.pagination
+    }
+
 }

@@ -1,12 +1,14 @@
 import { GAME_FETCH_GAMES_SUCCESS } from '../mutation-types'
 
 const state = {
-    games: [],
+    games     : [],
+    pagination: {},
 }
 
 const mutations = {
-    [GAME_FETCH_GAMES_SUCCESS] (state, games) {
-        state.games = games
+    [GAME_FETCH_GAMES_SUCCESS] (state, games, pagination) {
+        state.games      = games
+        state.pagination = pagination
     },
 }
 

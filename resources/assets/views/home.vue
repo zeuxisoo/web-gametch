@@ -11,6 +11,8 @@
                 </div>
             </div>
         </div>
+
+        <pagination v-bind:pagination="pagination" route-name="home"></pagination>
     </div>
 </template>
 
@@ -18,6 +20,7 @@
 </style>
 
 <script>
+import pagination from '../components/pagination.vue'
 import { gameGetter } from '../vuex/getters'
 import { gameAction } from '../vuex/actions'
 
@@ -25,7 +28,8 @@ export default {
 
     vuex: {
         getters: {
-            games: gameGetter.games
+            games     : gameGetter.games,
+            pagination: gameGetter.pagination
         },
         actions: {
             fetchGames: gameAction.fetchGames
@@ -34,8 +38,14 @@ export default {
 
     route: {
         data() {
-            this.fetchGames()
+            let page = 'page' in this.$route.query ? this.$route.query.page : 1;
+
+            this.fetchGames(page)
         }
+    },
+
+    components: {
+        pagination: pagination
     }
 
 }
