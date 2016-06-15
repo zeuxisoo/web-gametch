@@ -5,9 +5,9 @@ import * as types from '../mutation-types'
 
 export default class TopicAction {
 
-    save({ dispatch, router }, game_id, subject, content) {
+    save({ dispatch, router }, gameId, subject, content) {
         api.topic.save({
-            game_id: game_id,
+            game_id: gameId,
             subject: subject,
             content: content,
         }).then(
@@ -22,9 +22,25 @@ export default class TopicAction {
                 router.go({
                     name  : 'game',
                     params: {
-                        id: game_id
+                        id: gameId
                     }
                 })
+            },
+            response => ResponseHelper.error(response)
+        )
+    }
+
+    fetchTopics({ dispatch, router }, gameId, page) {
+        api.topic.all({
+            page: page || 1,
+            id  : gameId
+        }).then(
+            response => {
+                let body       = response.data
+                let topics     = body.data
+                let pagination = body.meta.pagination
+
+                dispatch(types.TOPIC_FETCH_TOPICS_SUCCESS, topics, pagination)
             },
             response => ResponseHelper.error(response)
         )

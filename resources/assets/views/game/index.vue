@@ -11,20 +11,22 @@
                 <a v-link="{ name: 'game-create', params: { id: game.id } }" class="btn btn-default btn-md" v-if="authenticated">Create</a>
             </div>
         </div>
-        <br>
+        <hr>
         <div class="row">
             <div class="col-md-12">
-                <div class="media">
+                <div class="media" v-for="topic in topics">
                     <div class="media-body topic-body">
-                        <h4 class="media-heading topic-heading">This is a subject</h4>
+                        <h4 class="media-heading topic-heading">{{ topic.subject }}</h4>
                         <div class="topic-status">
-                            <i class="fa fa-user" aria-hidden="true"></i> username
-                            <i class="fa fa-clock-o" aria-hidden="true"></i> 2 hours ago
+                            <i class="fa fa-user" aria-hidden="true"></i> {{ topic.user.data.username }}
+                            <i class="fa fa-clock-o" aria-hidden="true"></i> {{ topic.created_at }}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
+        <pagination v-bind:pagination="pagination" route-name="game" route-params="{ id: game.id }"></pagination>
     </div>
 </template>
 
@@ -61,27 +63,37 @@
 </style>
 
 <script>
-import { authGetter, gameGetter } from '../../vuex/getters'
-import { gameAction } from '../../vuex/actions'
+import pagination from '../../components/pagination.vue'
+import { authGetter, gameGetter, topicGetter } from '../../vuex/getters'
+import { gameAction, topicAction } from '../../vuex/actions'
 
 export default {
 
     vuex: {
         getters: {
             authenticated: authGetter.isAuthenticated,
-            game         : gameGetter.game
+            game         : gameGetter.game,
+            topics       : topicGetter.topics,
+            pagination   : topicGetter.pagination
         },
         actions: {
-            fetchGame: gameAction.fetchGame
+            fetchGame  : gameAction.fetchGame,
+            fetchTopics: topicAction.fetchTopics,
         }
     },
 
     route: {
         data() {
-            let id = this.$route.params.id
+            let id   = this.$route.params.id
+            let page = 'page' in this.$route.query ? this.$route.query.page : 1;
 
             this.fetchGame(id)
+            this.fetchTopics(id, page)
         }
+    },
+
+    components: {
+        pagination: pagination
     }
 
 }
