@@ -8,7 +8,7 @@
                 </div>
             </div>
             <div class="col-md-2 page-action text-right">
-                <a v-link="{ name: 'game-create', params: { id: game.id } }" class="btn btn-default btn-md">Create</a>
+                <a v-link="{ name: 'game-create', params: { id: game.id } }" class="btn btn-default btn-md" v-if="authenticated">Create</a>
             </div>
         </div>
         <br>
@@ -61,14 +61,15 @@
 </style>
 
 <script>
-import { gameGetter } from '../../vuex/getters'
+import { authGetter, gameGetter } from '../../vuex/getters'
 import { gameAction } from '../../vuex/actions'
 
 export default {
 
     vuex: {
         getters: {
-            game: gameGetter.game
+            authenticated: authGetter.isAuthenticated,
+            game         : gameGetter.game
         },
         actions: {
             fetchGame: gameAction.fetchGame

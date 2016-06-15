@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import { sync } from 'vuex-router-sync'
 import store from './vuex/store'
+import * as constraints from './constraint'
+import StorageHelper from './helpers/storage'
 import Api from './api'
 
 Vue.use(VueRouter)
@@ -34,10 +36,29 @@ Router.map({
     },
 
     '/game/:id/create': {
+        auth     : true,
         name     : 'game-create',
         component: require('./views/game/create.vue')
     },
 })
+
+Router.beforeEach((transition) => {
+    let token = StorageHelper.get(constraints.TOKEN_NAME);
+
+    if (transition.to.auth) {
+        if (!token) {
+            transition.redirect('/');
+        }
+    }
+
+    if (transition.to.guest) {
+        if (token) {
+            transition.redirect('/');
+        }
+    }
+
+    transition.next();
+});
 
 sync(store, Router)
 
