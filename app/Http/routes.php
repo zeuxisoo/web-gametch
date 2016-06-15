@@ -60,5 +60,9 @@ $api->version('v1', function($api) {
         $api->group(['prefix' => 'user', 'middleware' => 'api.auth'], function($api) {
             $api->get('me', ['as' => 'api.user.me', 'uses' => 'UserController@me']);
         });
+
+        $api->group(['prefix' => 'game'], function($api) {
+            $api->get('all', ['as' => 'api.game.all', 'uses' => 'GameController@all']);
+        });
     });
 });
