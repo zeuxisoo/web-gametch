@@ -20,4 +20,10 @@ class GameController extends ApiController {
         return $this->response->paginator($games, new GameTransformer);
     }
 
+    public function show($id) {
+        $game = $this->gameRepository->findById($id);
+
+        return $this->response->item($game, new GameTransformer);
+    }
+
 }
