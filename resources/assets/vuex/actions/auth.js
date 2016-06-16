@@ -1,7 +1,9 @@
 import api from '../../api'
 import ResponseHelper from '../../helpers/response'
 import MessageHelper from '../../helpers/message'
+import Storagehelper from '../../helpers/storage'
 import * as types from '../mutation-types'
+import * as constraints from '../../constraint'
 
 export default class AuthAction {
 
@@ -76,7 +78,12 @@ export default class AuthAction {
 
                 dispatch(types.AUTH_SIGNIN_SUCCESS, user, token)
             },
-            response => ResponseHelper.error(response)
+            response => {
+                api.headers.setAuthorizationToken("")
+
+                Storagehelper.remove(constraints.TOKEN_NAME)
+                ResponseHelper.error(response)
+            }
         )
     }
 
