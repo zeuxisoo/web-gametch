@@ -44,9 +44,9 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <textarea name="comment" rows="5" class="form-control"></textarea>
+                            <textarea name="comment" rows="5" class="form-control" v-model="comment"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-default">Reply</button>
+                        <button type="submit" class="btn btn-default" v-on:click="save">Save</button>
                     </div>
                 </div>
             </div>
@@ -83,7 +83,7 @@
 
 <script>
 import { authGetter, topicGetter } from '../../vuex/getters'
-import { topicAction } from '../../vuex/actions'
+import { topicAction, commentAction } from '../../vuex/actions'
 
 export default {
 
@@ -94,6 +94,13 @@ export default {
         },
         actions: {
             fetchGameTopic: topicAction.fetchTopic,
+            saveComment   : commentAction.save,
+        }
+    },
+
+    data() {
+        return {
+            comment: "",
         }
     },
 
@@ -102,6 +109,12 @@ export default {
             let id = this.$route.params.id
 
             this.fetchGameTopic(id)
+        }
+    },
+
+    methods: {
+        save() {
+            this.saveComment(this.$route.params.id, this.comment)
         }
     }
 
