@@ -36,4 +36,10 @@ class GameTopicController extends ApiController {
         return $this->response->paginator($gameTopics, new GameTopicTransformer);
     }
 
+    public function show($id) {
+        $gameTopic = $this->gameTopicRepository->findById($id);
+
+        return $this->response->item($gameTopic, new GameTopicTransformer);
+    }
+
 }

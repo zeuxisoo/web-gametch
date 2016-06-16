@@ -67,7 +67,8 @@ $api->version('v1', function($api) {
         });
 
         $api->group(['prefix' => 'game-topic'], function($api) {
-            $api->get('/all', ['as' => 'api.game.topic.all', 'uses' => 'GameTopicController@all']);
+            $api->get('/all',       ['as' => 'api.game.topic.all',  'uses' => 'GameTopicController@all']);
+            $api->get('/show/{id}', ['as' => 'api.game.topic.show', 'uses' => 'GameTopicController@show']);
 
             $api->group(['middleware' => 'api.auth'], function($api) {
                 $api->post('/store', ['as' => 'api.game.topic.store', 'uses' => 'GameTopicController@store']);
