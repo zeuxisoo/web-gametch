@@ -12,7 +12,7 @@
                         <span class="column">{{ topic.created_at }}</span>
 
                         <i class="fa fa-book" aria-hidden="true"></i>
-                        <span class="column">{{ topic.category.data.english_name }}</span>
+                        <span class="column">{{ topic.game.data.category.data.english_name }}</span>
                     </div>
                 </div>
             </div>
