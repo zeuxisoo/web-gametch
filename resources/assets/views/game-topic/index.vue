@@ -22,9 +22,27 @@
         </div>
 
         <div id="comments">
-            <div class="panel panel-default">
+            <div class="panel panel-default" v-if="comments.length <= 0">
                 <div class="panel-body">
                     <div class="alert alert-warning alert-no-margin-bottom" role="alert">No any comments</div>
+                </div>
+            </div>
+
+            <div class="panel panel-default" v-for="comment in comments">
+                <div class="panel-body">
+                    <div class="comment">
+                        <div class="comment-status">
+                            <i class="fa fa-user" aria-hidden="true"></i>
+                            <span class="column">{{ comment.user.data.username }}</span>
+
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>
+                            <span class="column">{{ comment.created_at }}</span>
+                        </div>
+                        <hr class="comment-line">
+                        <div class="comment-content">
+                            {{ comment.content }}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,10 +97,20 @@
 #game-topic-index .alert-no-margin-bottom {
     margin-bottom: 0px;
 }
+
+#game-topic-index #comments .comment-status {
+    color: #928080;
+    font-size: 12px;
+}
+
+#game-topic-index #comments .comment-line {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 </style>
 
 <script>
-import { authGetter, topicGetter } from '../../vuex/getters'
+import { authGetter, topicGetter, commentGetter } from '../../vuex/getters'
 import { topicAction, commentAction } from '../../vuex/actions'
 
 export default {
@@ -91,10 +119,12 @@ export default {
         getters: {
             authenticated: authGetter.isAuthenticated,
             topic        : topicGetter.topic,
+            comments     : commentGetter.comments,
         },
         actions: {
-            fetchGameTopic: topicAction.fetchTopic,
-            saveComment   : commentAction.save,
+            fetchGameTopic        : topicAction.fetchTopic,
+            fetchGameTopicComments: commentAction.fetchGameTopicComments,
+            saveComment           : commentAction.save,
         }
     },
 
@@ -109,12 +139,14 @@ export default {
             let id = this.$route.params.id
 
             this.fetchGameTopic(id)
+            this.fetchGameTopicComments(id)
         }
     },
 
     methods: {
         save() {
             this.saveComment(this.$route.params.id, this.comment)
+            this.comment = ""
         }
     }
 
