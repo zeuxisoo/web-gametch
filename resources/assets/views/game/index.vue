@@ -16,7 +16,9 @@
             <div class="col-md-12">
                 <div class="media" v-for="topic in topics">
                     <div class="media-body topic-body">
-                        <h4 class="media-heading topic-heading">{{ topic.subject }}</h4>
+                        <a v-link="{ name: 'game-topic', params: { id: topic.id } }">
+                            <h4 class="media-heading topic-heading">{{ topic.subject }}</h4>
+                        </a>
                         <div class="topic-status">
                             <i class="fa fa-user" aria-hidden="true"></i> {{ topic.user.data.username }}
                             <i class="fa fa-clock-o" aria-hidden="true"></i> {{ topic.created_at }}

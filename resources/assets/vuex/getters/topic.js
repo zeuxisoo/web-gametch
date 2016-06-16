@@ -8,4 +8,8 @@ export default class TopicGetter {
         return state.topic.pagination
     }
 
+    topic(state) {
+        return state.topic.topic
+    }
+
 }

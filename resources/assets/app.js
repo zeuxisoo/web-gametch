@@ -40,6 +40,11 @@ Router.map({
         name     : 'game-create',
         component: require('./views/game/create.vue')
     },
+
+    '/game/topic/:id': {
+        name     : 'game-topic',
+        component: require('./views/game-topic/index.vue')
+    },
 })
 
 Router.beforeEach((transition) => {

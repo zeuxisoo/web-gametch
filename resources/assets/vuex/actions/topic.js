@@ -46,4 +46,16 @@ export default class TopicAction {
         )
     }
 
+    fetchTopic({ dispatch, router }, topicId) {
+        api.topic.show(topicId).then(
+            response => {
+                let body  = response.data
+                let topic = body.data
+
+                dispatch(types.TOPIC_SAVE_SUCCESS, topic)
+            },
+            response => ResponseHelper.error(response)
+        )
+    }
+
 }

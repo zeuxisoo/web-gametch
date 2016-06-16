@@ -16,4 +16,8 @@ export default class Topic extends Base {
         return this.vue.http.get(this.apiUrl('/game-topic/all'), params)
     }
 
+    show(id) {
+        return this.vue.http.get(this.apiUrl('/game-topic/show/' + id))
+    }
+
 }
