@@ -29,4 +29,11 @@ class GameTopicCommentController extends ApiController {
         return $this->response->item($gameTopicComment, new GameTopicCommentTransformer);
     }
 
+    public function all(Request $request) {
+        $gameTopicId       = $request->get('id', 1);
+        $gameTopicComments = $this->gameTopicCommentRepository->findAllByGameTopicIdWithPaginate($gameTopicId);
+
+        return $this->response->paginator($gameTopicComments, new GameTopicCommentTransformer);
+    }
+
 }

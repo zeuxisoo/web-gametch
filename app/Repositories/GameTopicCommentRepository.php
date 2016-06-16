@@ -16,4 +16,8 @@ class GameTopicCommentRepository extends AppRepository {
         return (new GameTopicComment)->create($input);
     }
 
+    public function findAllByGameTopicIdWithPaginate($gameTopicId, $perPage = 10) {
+        return $this->gameTopicComment->whereGameTopicId($gameTopicId)->orderBy('created_at', 'asc')->paginate($perPage);
+    }
+
 }

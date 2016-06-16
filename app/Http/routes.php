@@ -76,6 +76,8 @@ $api->version('v1', function($api) {
         });
 
         $api->group(['prefix' => 'game-topic-comment'], function($api) {
+            $api->get('/all', ['as' => 'api.game.topic.comment.all',  'uses' => 'GameTopicCommentController@all']);
+
             $api->group(['middleware' => 'api.auth'], function($api) {
                 $api->post('/store', ['as' => 'api.game.topic.comment.store', 'uses' => 'GameTopicCommentController@store']);
             });
