@@ -20,6 +20,39 @@
                 {{ topic.content }}
             </div>
         </div>
+
+        <div id="comments">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="alert alert-warning alert-no-margin-bottom" role="alert">No any comments</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default" v-if="!authenticated">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="alert alert-warning alert-no-margin-bottom" role="alert">Leave comment? Please <a v-link="{ name: 'signin' }">sign in</a> first</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default" v-if="authenticated">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <textarea name="comment" rows="5" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-default">Reply</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
     </div>
 </template>
 
@@ -42,17 +75,22 @@
 #game-topic-index .topic-content {
     padding: 10px;
 }
+
+#game-topic-index .alert-no-margin-bottom {
+    margin-bottom: 0px;
+}
 </style>
 
 <script>
-import { topicGetter } from '../../vuex/getters'
+import { authGetter, topicGetter } from '../../vuex/getters'
 import { topicAction } from '../../vuex/actions'
 
 export default {
 
     vuex: {
         getters: {
-            topic: topicGetter.topic,
+            authenticated: authGetter.isAuthenticated,
+            topic        : topicGetter.topic,
         },
         actions: {
             fetchGameTopic: topicAction.fetchTopic,
