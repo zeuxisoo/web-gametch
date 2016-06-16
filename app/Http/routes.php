@@ -74,5 +74,11 @@ $api->version('v1', function($api) {
                 $api->post('/store', ['as' => 'api.game.topic.store', 'uses' => 'GameTopicController@store']);
             });
         });
+
+        $api->group(['prefix' => 'game-topic-comment'], function($api) {
+            $api->group(['middleware' => 'api.auth'], function($api) {
+                $api->post('/store', ['as' => 'api.game.topic.comment.store', 'uses' => 'GameTopicCommentController@store']);
+            });
+        });
     });
 });
