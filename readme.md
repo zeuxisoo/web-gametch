@@ -8,7 +8,9 @@ Assets
 
     npm install
     ./node_modules/.bin/bower install
-    npm run prod
+
+    npm run prod # for production
+    npm run dev  # for development
 
 Composer
 
